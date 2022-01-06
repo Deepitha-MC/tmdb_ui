@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moviedb/components/moviesgrid.dart';
-import 'package:moviedb/constants/input_decoration.dart';
-import 'package:moviedb/services/database.dart';
+import 'package:tmdb/components/songGrid.dart';
+import 'package:tmdb/constants/input_decoration.dart';
+import 'package:tmdb/services/database.dart';
 
 // ignore: must_be_immutable
 class BrowseScreenWidget extends StatefulWidget {
@@ -102,7 +102,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
             flex: 8,
             child: Center(
               child: isSearching
-                  ? MoviesGrid(
+                  ? songGrid(
                       future: _db.handleBrowseRequests(searchingValue, index))
                   : Text('Results will appear here'),
             ),

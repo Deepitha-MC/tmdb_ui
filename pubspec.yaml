@@ -1,4 +1,4 @@
-name: moviedb
+name: tmdb
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -42,6 +42,9 @@ dependencies:
   get: ^4.6.1
   get_storage: 
   font_awesome_flutter: ^9.2.0
+  html: ^0.15.0
+  flutter_html: ^2.2.1
+  url_launcher: ^6.0.17
 
 dev_dependencies:
   flutter_test:

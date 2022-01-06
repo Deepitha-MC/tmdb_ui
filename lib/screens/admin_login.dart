@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:moviedb/constants/input_decoration.dart';
-import 'package:moviedb/services/database.dart';
+import 'package:tmdb/constants/input_decoration.dart';
+import 'package:tmdb/services/database.dart';
 
 class AdminLogin extends StatelessWidget {
   const AdminLogin({Key? key}) : super(key: key);
@@ -313,7 +313,7 @@ class AdminLogin extends StatelessWidget {
                 color: Colors.red,
                 onPressed: () async {
                   if (_key.currentState!.validate()) {
-                    final resp = await Database().addMovie(
+                    final resp = await Database().addSong(
                         _titleController.text,
                         _plotController.text,
                         _yearController.text,

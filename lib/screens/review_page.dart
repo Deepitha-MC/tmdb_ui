@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moviedb/services/database.dart';
+import 'package:tmdb/services/database.dart';
 
 class ReviewPage extends StatefulWidget {
   int mId;

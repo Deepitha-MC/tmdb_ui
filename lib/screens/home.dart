@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:moviedb/components/moviesgrid.dart';
-import 'package:moviedb/services/database.dart';
-import 'package:moviedb/services/user.dart';
+import 'package:tmdb/components/songGrid.dart';
+import 'package:tmdb/services/database.dart';
+import 'package:tmdb/services/user.dart';
 
 class HomeWidget extends StatefulWidget {
   double width;
@@ -73,7 +73,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ],
                             ),
                           ),
-                          hintText: 'example ->The Matrix',
+                          hintText: 'example ->Bleed',
                           hintStyle: const TextStyle(fontSize: 12),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
@@ -93,7 +93,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   padding: const EdgeInsets.only(right: 10, top: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.green,
                     child: Text(
                       box.read('uname').toString()[0],
                       style: const TextStyle(fontSize: 20),
@@ -117,10 +117,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           Expanded(
             flex: 8,
             child: Center(
-              child: MoviesGrid(
+              child: songGrid(
                 future: isSearching
-                    ? Database().searchMovie(searchTitle)
-                    : Database().getMovieList(),
+                    ? Database().searchSong(searchTitle)
+                    : Database().getSongList(),
               ),
             ),
           )

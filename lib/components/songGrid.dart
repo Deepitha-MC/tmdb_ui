@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:moviedb/screens/movie_page.dart';
-import 'package:moviedb/services/database.dart';
+import 'package:tmdb/screens/song_page.dart';
+import 'package:tmdb/services/database.dart';
 import 'package:lottie/lottie.dart';
 
-class MoviesGrid extends StatefulWidget {
+class songGrid extends StatefulWidget {
   Future future;
-  MoviesGrid({Key? key, required this.future}) : super(key: key);
+  songGrid({Key? key, required this.future}) : super(key: key);
 
   @override
   _MoviesGridState createState() => _MoviesGridState();
 }
 
-class _MoviesGridState extends State<MoviesGrid> {
+class _MoviesGridState extends State<songGrid> {
   late ScrollController _controller;
   bool isHover = false;
   @override
@@ -64,11 +64,13 @@ class _MoviesGridState extends State<MoviesGrid> {
                       }));
                     },
                     child: Hero(
-                      tag: snap.data[i]['poster_url'],
+                      tag: snap.data[i]['songID'],
                       child: Image.network(
-                        snap.data[i]['poster_url'],
+                        snap.data[i]['url'],
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
+                          print(error.toString());
+                          print(stackTrace);
                           return Image.asset(
                             'assets/images/pp,840x830-pad,1000x1000,f8f8f8.u2.jpg',
                             width: 500,

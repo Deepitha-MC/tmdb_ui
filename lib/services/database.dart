@@ -3,22 +3,26 @@ import 'package:get_storage/get_storage.dart';
 
 class Database {
   final dio = Dio();
-  Future getAllData(int mId) async {
+  Future getAllData(int songID) async {
     final resp = await dio.get(
-      'http://localhost:3000/getMovieDetails',
-      queryParameters: {'m_id': mId},
+      'http://192.168.20.208:5000/getSongDetails',
+      queryParameters: {'songID': songID},
     );
+    print(resp.data);
     return resp.data[0];
   }
 
-  Future getMovieList() async {
-    final resp = await dio.get('http://localhost:3000/');
+  Future getSongList() async {
+    final resp = await dio.get('http://192.168.20.208:5000/');
+    print("here");
+    print(resp.data[0]['url']);
     return resp.data;
   }
 
-  Future searchMovie(title) async {
-    final resp = await dio.get('http://localhost:3000/getMovieByTitle',
-        queryParameters: {'title': title});
+  Future searchSong(id) async {
+    final resp = await dio.get('http://192.168.20.208:5000/getSongDetails',
+        queryParameters: {'songID': id});
+    print(resp.data);
     return resp.data;
   }
 
@@ -27,11 +31,11 @@ class Database {
     late Map<String, dynamic> query;
     switch (index) {
       case '1':
-        url = 'http://localhost:3000/getMoviesByLanguage';
+        url = 'http://192.168.20.208:5000/getMoviesByLanguage';
         query = {'lang': val};
         break;
       case '2':
-        url = 'http://localhost:3000/getMoviesByDirector';
+        url = 'http://192.168.20.208:5000/getMoviesByDirector';
         query = {'dname': val};
         break;
       case '3':
@@ -84,7 +88,7 @@ class Database {
     return resp.data;
   }
 
-  Future addMovie(title, plot, year, duration, url, country, production,
+  Future addSong(title, plot, year, duration, url, country, production,
       boxOffice, awards, language, genre, director) async {
     final resp = await dio.post('http://localhost:3000/add_movie', data: {
       "title": title,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
-import 'package:moviedb/components/moviesgrid.dart';
-import 'package:moviedb/screens/browse.dart';
-import 'package:moviedb/screens/home.dart';
-import 'package:moviedb/services/controller.dart';
+import 'package:tmdb/components/songGrid.dart';
+import 'package:tmdb/screens/browse.dart';
+import 'package:tmdb/screens/home.dart';
+import 'package:tmdb/services/controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const ListTile(
                           title: Text(
-                            'MovieDB.',
+                            'TMDB.',
                             style: TextStyle(
                               fontSize: 30,
                               color: Colors.red,

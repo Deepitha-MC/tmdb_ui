@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:moviedb/services/user.dart';
+import 'package:tmdb/services/user.dart';
 import '../constants/input_decoration.dart';
 import 'package:get/get.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -58,12 +58,12 @@ class _LogInState extends State<LogIn> {
                       width: 600,
                       child: TextFormField(
                         controller: _usernameController,
-                        cursorColor: Colors.red,
+                        cursorColor: Colors.green,
                         validator: RequiredValidator(
                           errorText: 'Username is required',
                         ),
                         decoration: inputDecoration.copyWith(
-                          labelText: 'Username',
+                          labelText: 'username',
                         ),
                       ),
                     ),
@@ -78,12 +78,13 @@ class _LogInState extends State<LogIn> {
                     child: SizedBox(
                         width: 600,
                         child: TextFormField(
+                          obscureText: true,
                           controller: _passwordController,
                           validator: RequiredValidator(
                               errorText: 'Password is required'),
-                          cursorColor: Colors.red,
+                          cursorColor: Colors.green,
                           decoration: inputDecoration.copyWith(
-                            labelText: 'Password',
+                            labelText: 'password',
                           ),
                         )),
                   ),
@@ -98,7 +99,7 @@ class _LogInState extends State<LogIn> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
-                    color: Colors.red,
+                    color: Colors.green,
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
@@ -116,7 +117,7 @@ class _LogInState extends State<LogIn> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                resp['error'],
+                                resp['msg'],
                               ),
                             ),
                           );
@@ -129,7 +130,7 @@ class _LogInState extends State<LogIn> {
                     ),
                   ),
                   Card(
-                    color: Colors.red,
+                    color: Colors.green,
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
@@ -142,6 +143,7 @@ class _LogInState extends State<LogIn> {
                         if (_key.currentState!.validate()) {
                           var resp = await _auth.login(_usernameController.text,
                               _passwordController.text);
+                          // print(resp);
                           if (resp['status'] == 200) {
                             box.write('uname', _usernameController.text);
                             Navigator.pushReplacementNamed(
@@ -150,7 +152,7 @@ class _LogInState extends State<LogIn> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  resp['error'],
+                                  resp['msg'],
                                 ),
                               ),
                             );
@@ -163,33 +165,33 @@ class _LogInState extends State<LogIn> {
                       ),
                     ),
                   ),
-                  Card(
-                    color: Colors.red,
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                    child: MaterialButton(
-                      minWidth: 200,
-                      height: 42,
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/admin_login');
-                      },
-                      child: const Text(
-                        'Admin login',
-                        style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
-                      ),
-                    ),
-                  )
+                  // Card(
+                  //   color: Colors.red,
+                  //   elevation: 10,
+                  //   shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(14)),
+                  //   child: MaterialButton(
+                  //     minWidth: 200,
+                  //     height: 42,
+                  //     onPressed: () {
+                  //       Navigator.pushNamed(context, '/admin_login');
+                  //     },
+                  //     child: const Text(
+                  //       'Admin login',
+                  //       style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),
             Container(
                 margin: EdgeInsets.only(left: width / 1.2, top: 180),
                 child: const Text(
-                  'MovieDB.',
+                  'TMDB.',
                   style: TextStyle(
                       fontSize: 38,
-                      color: Colors.red,
+                      color: Colors.green,
                       fontWeight: FontWeight.bold),
                 ))
           ],

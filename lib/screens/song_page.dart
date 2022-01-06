@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
-import 'package:moviedb/screens/review_page.dart';
-import 'package:moviedb/services/database.dart';
+import 'package:tmdb/screens/review_page.dart';
+import 'package:tmdb/services/database.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class MoviePage extends StatefulWidget {
@@ -26,10 +28,10 @@ class _MoviePageState extends State<MoviePage> {
     return Scaffold(
       body: SingleChildScrollView(
           child: FutureBuilder(
-              future: Database().getAllData(widget.data['m_id'] as int),
+              future: Database().getAllData(widget.data['songID'] as int),
               builder: (context, AsyncSnapshot<dynamic> snap) {
                 if (snap.connectionState == ConnectionState.done) {
-                  rating = snap.data['average_rating'];
+                  // rating = snap.data['average_rating'];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +42,7 @@ class _MoviePageState extends State<MoviePage> {
                           alignment: Alignment.center,
                           children: [
                             Image.network(
-                              snap.data['poster_url'],
+                              snap.data['coverURL'],
                               fit: BoxFit.cover,
                               width: width,
                               height: height,
@@ -68,14 +70,14 @@ class _MoviePageState extends State<MoviePage> {
                             Positioned(
                               left: width / 20,
                               child: Hero(
-                                tag: snap.data['poster_url'],
+                                tag: snap.data['songID'],
                                 child: Card(
                                   elevation: 10,
                                   clipBehavior: Clip.antiAlias,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Image.network(
-                                    snap.data['poster_url'],
+                                    snap.data['coverURL'],
                                     width: 340,
                                     height: 520,
                                     fit: BoxFit.cover,
@@ -96,11 +98,11 @@ class _MoviePageState extends State<MoviePage> {
                               child: Center(
                                 child: RichText(
                                   text: TextSpan(
-                                      text: snap.data['title'],
+                                      text: snap.data['songName'],
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'geomet',
-                                        fontSize: snap.data['title']
+                                        fontSize: snap.data['songName']
                                                     .toString()
                                                     .length >
                                                 28
@@ -134,37 +136,23 @@ class _MoviePageState extends State<MoviePage> {
                                           fontFamily: 'geomet'),
                                       children: [
                                         const TextSpan(
-                                          text: 'Synopsys\n',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                        TextSpan(
-                                          text: snap.data['plot'] +
-                                              '\n\n\n\n\n\n\n\n',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontFamily: 'prodSans',
-                                              fontSize: 16),
-                                        ),
-                                        const TextSpan(
-                                          text:
-                                              'Released on :                     ',
+                                          text: 'Released on :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
-                                          text: snap.data['year']
+                                          text: snap.data['releaseYear']
                                                       .toString()
-                                                      .split('T')[0] ==
+                                                  //     .split('T')[0] ==
+                                                  ==
                                                   '0000-00-00'
-                                              ? 'N/A\n'
-                                              : snap.data['year']
-                                                      .toString()
-                                                      .split('T')[0] +
-                                                  '\n',
+                                              ? '\n'
+                                              : snap.data['releaseYear']
+                                                  .toString(),
+                                          // .split('T')[0] +
+                                          // '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 16,
@@ -172,15 +160,14 @@ class _MoviePageState extends State<MoviePage> {
                                           ),
                                         ),
                                         const TextSpan(
-                                          text:
-                                              'Director :                           ',
+                                          text: '\nArtist :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
-                                          text: snap.data['dname'] + '\n',
+                                          text: snap.data['artist'] + '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 16,
@@ -188,14 +175,14 @@ class _MoviePageState extends State<MoviePage> {
                                           ),
                                         ),
                                         const TextSpan(
-                                          text: 'Country of origin :          ',
+                                          text: 'Album :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
-                                          text: snap.data['country'] + '\n',
+                                          text: snap.data['album'] + '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 16,
@@ -203,8 +190,7 @@ class _MoviePageState extends State<MoviePage> {
                                           ),
                                         ),
                                         const TextSpan(
-                                          text:
-                                              'Language :                         ',
+                                          text: 'Language :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
@@ -219,15 +205,14 @@ class _MoviePageState extends State<MoviePage> {
                                           ),
                                         ),
                                         const TextSpan(
-                                          text:
-                                              'Box-office :                       ',
+                                          text: 'genre :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
-                                          text: snap.data['box_office'] + '\n',
+                                          text: snap.data['genre'] + '\n',
                                           style: const TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
@@ -235,64 +220,52 @@ class _MoviePageState extends State<MoviePage> {
                                               fontSize: 16),
                                         ),
                                         const TextSpan(
-                                          text:
-                                              'Production :                     ',
+                                          text: 'Where to listen :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.italic,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
-                                          text: snap.data['production'] + '\n',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.normal,
-                                              fontFamily: 'prodSans',
-                                              fontSize: 16),
-                                        ),
-                                        const TextSpan(
                                           text:
-                                              'Awards :                             ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
-                                              fontSize: 12),
-                                        ),
-                                        TextSpan(
-                                          text: snap.data['awards'] + '\n',
+                                              snap.data['songURL'].toString() +
+                                                  '\n',
                                           style: const TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
                                               fontFamily: 'prodSans',
                                               fontSize: 16),
                                         ),
+                                        // const TextSpan(
+                                        //   text:
+                                        //       'Awards :                             ',
+                                        //   style: TextStyle(
+                                        //       fontWeight: FontWeight.normal,
+                                        //       fontStyle: FontStyle.italic,
+                                        //       fontSize: 12),
+                                        // ),
+                                        // TextSpan(
+                                        //   text: snap.data['awards'] + '\n',
+                                        //   style: const TextStyle(
+                                        //       fontWeight: FontWeight.normal,
+                                        //       fontStyle: FontStyle.normal,
+                                        //       fontFamily: 'prodSans',
+                                        //       fontSize: 16),
+                                        // ),
                                       ]),
                                 ),
                               ),
                             ),
 
                             Positioned(
-                              top: 560,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Average Rating   ' +
-                                        (snap.data['average_rating'] as double)
-                                            .toStringAsFixed(2),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                                  const Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                  )
-                                ],
-                              ),
-                            ),
+                                top: 340,
+                                left: 1000,
+                                child: Center(
+                                  child: Html(
+                                      data: ''' <iframe width="420" height="315"
+src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('?v=', '/')}">
+</iframe> '''),
+                                )),
                             Positioned(
                               top: 620,
                               child: Row(
@@ -308,7 +281,7 @@ class _MoviePageState extends State<MoviePage> {
                                               BorderRadius.circular(10)),
                                       clipBehavior: Clip.antiAlias,
                                       child: MaterialButton(
-                                        color: Colors.red,
+                                        color: Colors.green,
                                         onPressed: () {
                                           showDialog(
                                               context: context,
@@ -394,7 +367,7 @@ class _MoviePageState extends State<MoviePage> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return ReviewPage(
-                                              mId: widget.data['m_id'],
+                                              mId: widget.data['songID'],
                                             );
                                           }));
                                         },
