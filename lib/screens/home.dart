@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tmdb/components/songGrid.dart';
 import 'package:tmdb/services/database.dart';
-import 'package:tmdb/services/user.dart';
+// import 'package:tmdb/services/user.dart';
 
 class HomeWidget extends StatefulWidget {
   double width;

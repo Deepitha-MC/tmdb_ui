@@ -14,17 +14,17 @@ class BrowseScreenWidget extends StatefulWidget {
 
 class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
   List<String> titles = [
-    '1.language',
-    '2.director name',
+    '1.Language',
+    '2.Artist',
     //  'year of release',
-    '3.minimum box-office collection',
-    '4.maximum box-office collection',
-    '5.country of origin',
+    '3.Release Year',
+    '4.Album',
+    '5.Country',
     '6.genre',
     '7.above rating',
     '8.below rating'
   ];
-  String selectedVal = '1.language';
+  String selectedVal = '1.Language';
   String searchingValue = '';
   String index = '1';
   bool isSearching = false;
@@ -51,7 +51,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
                   child: SizedBox(
                     width: 500,
                     child: TextFormField(
-                      cursorColor: Colors.red,
+                      cursorColor: Colors.green,
                       decoration: inputDecoration.copyWith(
                           labelText:
                               ' search by entering ${selectedVal.toString().split('.')[1]}'),

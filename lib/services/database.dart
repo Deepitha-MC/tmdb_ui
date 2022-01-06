@@ -31,43 +31,48 @@ class Database {
     late Map<String, dynamic> query;
     switch (index) {
       case '1':
-        url = 'http://192.168.20.208:5000/getMoviesByLanguage';
-        query = {'lang': val};
+        if (val == 'lang') {
+          url = 'http://192.168.20.208:5000/getLang';
+        } else {
+          url = 'http://192.168.20.208:5000/getSongsByLang';
+          query = {'lang': val};
+        }
         break;
       case '2':
-        url = 'http://192.168.20.208:5000/getMoviesByDirector';
-        query = {'dname': val};
+        url = 'http://192.168.20.208:5000/getSongsByArtist';
+        query = {'artist': val};
         break;
       case '3':
-        url = 'http://localhost:3000/minCollection';
-        query = {'minCollection': val};
+        url = 'http://192.168.20.208:5000/getSongsByYear';
+        query = {'year': val};
         break;
       case '4':
-        url = 'http://localhost:3000/maxCollection';
-        query = {'maxCollection': val};
+        url = 'http://192.168.20.208:5000/getAlbum';
+        query = {'album': val};
         break;
       case '5':
-        url = 'http://localhost:3000/getMoviesByCountry';
+        url = 'http://192.168.20.208:5000/getSongsByCountry';
         query = {'country': val};
         break;
       case '6':
-        url = 'http://localhost:3000/getMoviesByGenre';
+        url = 'http://192.168.20.208:5000/getSongsByGenre';
         query = {'genre': val};
         break;
       case '7':
-        url = 'http://localhost:3000/getMoviesRatedAbove';
+        url = 'http://192.168.20.208:5000/getSongsRatedAbove';
         query = {'rating': val};
         break;
       case '8':
-        url = 'http://localhost:3000/getMoviesRatedBelow';
+        url = 'http://192.168.20.208:5000/getSongsRatedBelow';
         query = {'rating': val};
         break;
       default:
-        url = 'http://localhost:3000/getMovieByTitle';
-        query = {'title': val};
+        url = 'http://192.168.20.208:5000/getSongByTitle';
+        query = {'songName': val};
         break;
     }
     final resp = await dio.get(url, queryParameters: query);
+    // print(resp.data[0]);
     return resp.data;
   }
 

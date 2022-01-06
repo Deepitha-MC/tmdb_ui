@@ -36,6 +36,7 @@ class _MoviesGridState extends State<songGrid> {
             ),
           );
         } else if (snap.data!.length == 0) {
+          print(snap.data);
           return Center(
               child: Lottie.network(
                   'https://assets1.lottiefiles.com/packages/lf20_y6ilh1zw.json'));
@@ -69,8 +70,6 @@ class _MoviesGridState extends State<songGrid> {
                         snap.data[i]['url'],
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
-                          print(error.toString());
-                          print(stackTrace);
                           return Image.asset(
                             'assets/images/pp,840x830-pad,1000x1000,f8f8f8.u2.jpg',
                             width: 500,
