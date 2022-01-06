@@ -39,7 +39,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: TextFormField(
-                        cursorColor: Colors.black,
+                        cursorColor: Colors.green,
                         controller: _searchController,
                         onFieldSubmitted: (value) {
                           if (value != '') {
@@ -60,13 +60,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                               children: const [
                                 Icon(
                                   Icons.search,
-                                  color: Colors.amber,
+                                  color: Colors.lightGreen,
                                 ),
                                 Text(
                                   'Search...',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.lightGreen,
                                     fontSize: 12,
                                   ),
                                 )
@@ -74,7 +74,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           ),
                           hintText: 'example ->Bleed',
-                          hintStyle: const TextStyle(fontSize: 12),
+                          hintStyle: const TextStyle(
+                              fontSize: 12, color: Colors.lightGreen),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                           ),
@@ -93,7 +94,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   padding: const EdgeInsets.only(right: 10, top: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.lightGreen,
                     child: Text(
                       box.read('uname').toString()[0],
                       style: const TextStyle(fontSize: 20),
@@ -119,7 +120,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             child: Center(
               child: songGrid(
                 future: isSearching
-                    ? Database().searchSong(searchTitle)
+                    ? Database().searchSongTitle(searchTitle)
                     : Database().getSongList(),
               ),
             ),

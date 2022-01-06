@@ -21,8 +21,15 @@ class Database {
 
   Future searchSong(id) async {
     final resp = await dio.get('http://192.168.20.208:5000/getSongDetails',
-        queryParameters: {'songID': id});
-    print(resp.data);
+        queryParameters: {'song': id});
+    // print(resp.data);
+    return resp.data;
+  }
+
+  Future searchSongTitle(name) async {
+    final resp = await dio.get('http://192.168.20.208:5000/getSongByTitle',
+        queryParameters: {'songName': name});
+    // print(resp.data);
     return resp.data;
   }
 

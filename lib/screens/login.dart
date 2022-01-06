@@ -32,11 +32,11 @@ class _LogInState extends State<LogIn> {
           child: Center(
             child: Text(
               'Login',
-              style: TextStyle(fontSize: 40, fontFamily: 'geomet'),
+              style: TextStyle(fontSize: 30, fontFamily: 'geomet'),
             ),
           ),
         ),
-        preferredSize: Size(width, 80),
+        preferredSize: Size(width, 90),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -186,11 +186,11 @@ class _LogInState extends State<LogIn> {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(left: width / 1.2, top: 180),
+                margin: EdgeInsets.only(left: width / 1000.0, top: 50),
                 child: const Text(
                   'TMDB.',
                   style: TextStyle(
-                      fontSize: 38,
+                      fontSize: 70,
                       color: Colors.green,
                       fontWeight: FontWeight.bold),
                 ))

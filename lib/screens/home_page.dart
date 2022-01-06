@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                             'TMDB.',
                             style: TextStyle(
                               fontSize: 30,
-                              color: Colors.red,
+                              color: Color(0xff00ff00),
                               fontWeight: FontWeight.bold,
                               fontFamily: 'geomet',
                             ),
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                           title: Text('Menu', style: TextStyle(fontSize: 13)),
                           leading: FaIcon(
                             FontAwesomeIcons.list,
-                            color: Color(0xffE50914),
+                            color: Color(0xff00ff00),
                           ),
                         ),
                         ListTile(
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 13)),
                           leading: const FaIcon(
                             FontAwesomeIcons.play,
-                            color: Color(0xffE50914),
+                            color: Color(0xff00ff00),
                           ),
                           onTap: () {
                             controller.index.value = 0;
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 13)),
                           leading: const FaIcon(
                             FontAwesomeIcons.search,
-                            color: Color(0xffE50914),
+                            color: Color(0xff00ff00),
                           ),
                           onTap: () {
                             controller.index.value = 1;
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 13)),
                           leading: const FaIcon(
                             FontAwesomeIcons.signOutAlt,
-                            color: Color(0xffE50914),
+                            color: Color(0xff00ff00),
                           ),
                           onTap: () {
                             Navigator.of(context).popAndPushNamed('/login');
