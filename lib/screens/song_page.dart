@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'dart:core';
 import 'package:flutter/material.dart';
@@ -7,23 +8,29 @@ import 'package:lottie/lottie.dart';
 import 'package:tmdb/screens/review_page.dart';
 import 'package:tmdb/services/database.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
-// ignore: must_be_immutable
-class MoviePage extends StatefulWidget {
-  Map<String, dynamic> data;
-
-  MoviePage({Key? key, required this.data}) : super(key: key);
-  @override
-  _MoviePageState createState() => _MoviePageState();
+void htmlOpenLink(String url) {
+//  String url = 'https://flutter.dev';
+  html.window.open(url, '_blank');
 }
 
-class _MoviePageState extends State<MoviePage> {
+// ignore: must_be_immutable
+class SongPage extends StatefulWidget {
+  Map<String, dynamic> data;
+
+  SongPage({Key? key, required this.data}) : super(key: key);
+  @override
+  _SongPageState createState() => _SongPageState();
+}
+
+class _SongPageState extends State<SongPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double rating = 10;
+    int rating = 10;
     final box = GetStorage();
     return Scaffold(
       body: SingleChildScrollView(
@@ -31,7 +38,8 @@ class _MoviePageState extends State<MoviePage> {
               future: Database().getAllData(widget.data['songID'] as int),
               builder: (context, AsyncSnapshot<dynamic> snap) {
                 if (snap.connectionState == ConnectionState.done) {
-                  // rating = snap.data['average_rating'];
+                  // rating = int.parse(snap.data['ratings']);
+
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,6 +55,7 @@ class _MoviePageState extends State<MoviePage> {
                               width: width,
                               height: height,
                             ),
+
                             ClipRRect(
                               // Clip it cleanly.
                               child: BackdropFilter(
@@ -128,7 +137,7 @@ class _MoviePageState extends State<MoviePage> {
                               left: width / 2.5,
                               child: Container(
                                 color: Colors.transparent,
-                                width: width / 3.4,
+                                width: width / 1,
                                 child: RichText(
                                   text: TextSpan(
                                       style: const TextStyle(
@@ -139,7 +148,7 @@ class _MoviePageState extends State<MoviePage> {
                                           text: 'Released on :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -163,7 +172,7 @@ class _MoviePageState extends State<MoviePage> {
                                           text: '\nArtist :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -178,7 +187,7 @@ class _MoviePageState extends State<MoviePage> {
                                           text: 'Album :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -190,10 +199,26 @@ class _MoviePageState extends State<MoviePage> {
                                           ),
                                         ),
                                         const TextSpan(
+                                          text: 'RecordingHouse :  ',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 12),
+                                        ),
+                                        TextSpan(
+                                          text: snap.data['recordingHouse'] +
+                                              '\n',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16,
+                                            fontFamily: 'prodSans',
+                                          ),
+                                        ),
+                                        const TextSpan(
                                           text: 'Language :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -208,7 +233,7 @@ class _MoviePageState extends State<MoviePage> {
                                           text: 'genre :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -223,7 +248,7 @@ class _MoviePageState extends State<MoviePage> {
                                           text: 'Where to listen :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                              fontStyle: FontStyle.italic,
+                                              fontStyle: FontStyle.normal,
                                               fontSize: 12),
                                         ),
                                         TextSpan(
@@ -236,26 +261,18 @@ class _MoviePageState extends State<MoviePage> {
                                               fontFamily: 'prodSans',
                                               fontSize: 16),
                                         ),
-                                        // const TextSpan(
-                                        //   text:
-                                        //       'Awards :                             ',
-                                        //   style: TextStyle(
-                                        //       fontWeight: FontWeight.normal,
-                                        //       fontStyle: FontStyle.italic,
-                                        //       fontSize: 12),
-                                        // ),
-                                        // TextSpan(
-                                        //   text: snap.data['awards'] + '\n',
-                                        //   style: const TextStyle(
-                                        //       fontWeight: FontWeight.normal,
-                                        //       fontStyle: FontStyle.normal,
-                                        //       fontFamily: 'prodSans',
-                                        //       fontSize: 16),
-                                        // ),
                                       ]),
                                 ),
                               ),
                             ),
+                            // Positioned(
+                            //   top: 286,
+                            //   left: width / 2.0,
+                            //   child: Html(
+                            //       data:
+                            //           // snap.data['songURL']
+                            //           "<a href={snap.data['songURL']}>youtube</a>"),
+                            // ),
 
                             Positioned(
                                 top: 340,
@@ -266,6 +283,27 @@ class _MoviePageState extends State<MoviePage> {
 src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('?v=', '/')}">
 </iframe> '''),
                                 )),
+                            Positioned(
+                              top: 560,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Rating : ' +
+                                        (snap.data['ratings']).toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  )
+                                ],
+                              ),
+                            ),
                             Positioned(
                               top: 620,
                               child: Row(
@@ -295,15 +333,15 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                       child: Text('Rating')),
                                                   actions: [
                                                     RatingBar.builder(
-                                                      initialRating: snap.data[
-                                                              'average_rating'] /
-                                                          2 as double,
+                                                      initialRating:
+                                                          (snap.data['ratings'])
+                                                              as double,
                                                       minRating: 1,
-                                                      maxRating: 5,
+                                                      maxRating: 10,
                                                       direction:
                                                           Axis.horizontal,
-                                                      allowHalfRating: true,
-                                                      itemCount: 5,
+                                                      allowHalfRating: false,
+                                                      itemCount: 10,
                                                       itemPadding:
                                                           const EdgeInsets
                                                                   .symmetric(
@@ -315,7 +353,7 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                         color: Colors.amber,
                                                       ),
                                                       onRatingUpdate: (rate) {
-                                                        rating = 2 * rate;
+                                                        rating = rate as int;
                                                       },
                                                     ),
                                                     Card(
@@ -330,11 +368,11 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                       clipBehavior:
                                                           Clip.antiAlias,
                                                       child: MaterialButton(
-                                                        color: Colors.red,
+                                                        color: Colors.green,
                                                         onPressed: () {
                                                           Database().addRating(
-                                                              widget
-                                                                  .data['m_id'],
+                                                              widget.data[
+                                                                  'songID'],
                                                               box.read('uname'),
                                                               rating);
                                                           Navigator.of(context)
@@ -361,17 +399,17 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                               BorderRadius.circular(10)),
                                       clipBehavior: Clip.antiAlias,
                                       child: MaterialButton(
-                                        color: Colors.red,
+                                        color: Colors.green,
                                         onPressed: () {
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return ReviewPage(
-                                              mId: widget.data['songID'],
+                                              songID: widget.data['songID'],
                                             );
                                           }));
                                         },
-                                        child: const Text('Add/View review'),
+                                        child: const Text('review'),
                                       ),
                                     ),
                                   ),

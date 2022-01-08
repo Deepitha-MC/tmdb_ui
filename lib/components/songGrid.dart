@@ -8,10 +8,10 @@ class songGrid extends StatefulWidget {
   songGrid({Key? key, required this.future}) : super(key: key);
 
   @override
-  _MoviesGridState createState() => _MoviesGridState();
+  _SongGridState createState() => _SongGridState();
 }
 
-class _MoviesGridState extends State<songGrid> {
+class _SongGridState extends State<songGrid> {
   late ScrollController _controller;
   bool isHover = false;
   @override
@@ -36,7 +36,6 @@ class _MoviesGridState extends State<songGrid> {
             ),
           );
         } else if (snap.data!.length == 0) {
-          print(snap.data);
           return Center(
               child: Lottie.network(
                   'https://assets1.lottiefiles.com/packages/lf20_y6ilh1zw.json'));
@@ -61,7 +60,7 @@ class _MoviesGridState extends State<songGrid> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MoviePage(data: snap.data[i]);
+                        return SongPage(data: snap.data[i]);
                       }));
                     },
                     child: Hero(

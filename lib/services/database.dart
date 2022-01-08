@@ -5,7 +5,7 @@ class Database {
   final dio = Dio();
   Future getAllData(int songID) async {
     final resp = await dio.get(
-      'http://192.168.20.208:5000/getSongDetails',
+      'http://localhost:5000/getSongDetails',
       queryParameters: {'songID': songID},
     );
     print(resp.data);
@@ -13,21 +13,21 @@ class Database {
   }
 
   Future getSongList() async {
-    final resp = await dio.get('http://192.168.20.208:5000/');
+    final resp = await dio.get('http://localhost:5000/');
     print("here");
     print(resp.data[0]['url']);
     return resp.data;
   }
 
   Future searchSong(id) async {
-    final resp = await dio.get('http://192.168.20.208:5000/getSongDetails',
+    final resp = await dio.get('http://localhost:5000/getSongDetails',
         queryParameters: {'song': id});
     // print(resp.data);
     return resp.data;
   }
 
   Future searchSongTitle(name) async {
-    final resp = await dio.get('http://192.168.20.208:5000/getSongByTitle',
+    final resp = await dio.get('http://localhost:5000/getSongByTitle',
         queryParameters: {'songName': name});
     // print(resp.data);
     return resp.data;
@@ -39,42 +39,42 @@ class Database {
     switch (index) {
       case '1':
         if (val == 'lang') {
-          url = 'http://192.168.20.208:5000/getLang';
+          url = 'http://localhost:5000/getLang';
         } else {
-          url = 'http://192.168.20.208:5000/getSongsByLang';
+          url = 'http://localhost:5000/getSongsByLang';
           query = {'lang': val};
         }
         break;
       case '2':
-        url = 'http://192.168.20.208:5000/getSongsByArtist';
+        url = 'http://localhost:5000/getSongsByArtist';
         query = {'artist': val};
         break;
       case '3':
-        url = 'http://192.168.20.208:5000/getSongsByYear';
+        url = 'http://localhost:5000/getSongsByYear';
         query = {'year': val};
         break;
       case '4':
-        url = 'http://192.168.20.208:5000/getAlbum';
+        url = 'http://localhost:5000/getAlbum';
         query = {'album': val};
         break;
       case '5':
-        url = 'http://192.168.20.208:5000/getSongsByCountry';
+        url = 'http://localhost:5000/getSongsByCountry';
         query = {'country': val};
         break;
       case '6':
-        url = 'http://192.168.20.208:5000/getSongsByGenre';
+        url = 'http://localhost:5000/getSongsByGenre';
         query = {'genre': val};
         break;
       case '7':
-        url = 'http://192.168.20.208:5000/getSongsRatedAbove';
+        url = 'http://localhost:5000/getSongsRatedAbove';
         query = {'rating': val};
         break;
       case '8':
-        url = 'http://192.168.20.208:5000/getSongsRatedBelow';
+        url = 'http://localhost:5000/getSongsRatedBelow';
         query = {'rating': val};
         break;
       default:
-        url = 'http://192.168.20.208:5000/getSongByTitle';
+        url = 'http://localhost:5000/getSongByTitle';
         query = {'songName': val};
         break;
     }
@@ -83,26 +83,27 @@ class Database {
     return resp.data;
   }
 
-  Future addRating(int mId, String uname, double rating) async {
-    final resp = await dio.post('http://localhost:3000/addRating', data: {
-      "m_id": mId,
-      "rating": rating,
-      "uname": uname,
+  Future addRating(int songID, String uname, rating) async {
+    final resp =
+        await dio.post('http://localhost:5000/addRating', queryParameters: {
+      "songID": songID,
+      "ratings": rating,
+      "username": uname,
     });
     resp.data;
   }
 
-  Future getReviews(int mId) async {
+  Future getReviews(int songID) async {
     final box = GetStorage();
-    final resp = await dio.get('http://localhost:3000/getReview',
-        queryParameters: {"m_id": mId, "uname": box.read('uname')});
+    final resp = await dio.get('http://localhost:5000/getAllReviews',
+        queryParameters: {"songID": songID});
     // print(resp.data);
     return resp.data;
   }
 
   Future addSong(title, plot, year, duration, url, country, production,
       boxOffice, awards, language, genre, director) async {
-    final resp = await dio.post('http://localhost:3000/add_movie', data: {
+    final resp = await dio.post('http://localhost:5000/addSong', data: {
       "title": title,
       "plot": plot,
       "year": year,
