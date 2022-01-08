@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:tmdb/screens/admin_login.dart';
+import 'package:tmdb/screens/admin_login.dart';
 import 'package:tmdb/screens/home_page.dart';
 import 'package:tmdb/screens/login.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tmdb/screens/insert_song.dart';
+
 // import 'package:tmdb/screens/review_page.dart';
 
 void main() async {
@@ -14,7 +16,8 @@ void main() async {
       routes: {
         '/login': (context) => const LogIn(),
         '/home_page': (context) => const HomePage(),
-        // '/admin_login': (context) => const AdminLogin(),
+        '/admin_login': (context) => const AdminPage(),
+        '/insert_song': (context) => const InsertSong(),
       },
       home: const App(),
     ),

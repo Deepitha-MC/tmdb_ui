@@ -102,23 +102,28 @@ class Database {
     return resp.data;
   }
 
-  Future addSong(title, plot, year, duration, url, country, production,
-      boxOffice, awards, language, genre, director) async {
-    final resp = await dio.post('http://localhost:5000/addSong', data: {
-      "title": title,
-      "plot": plot,
-      "year": year,
+  Future addSong(title, artist, releaseYear, duration, coverURL, country,
+      recordingHouse, songURL, album, language, genre) async {
+    final resp =
+        await dio.post('http://localhost:5000/addSong', queryParameters: {
+      "songName": title,
+      "artist": artist,
+      "releaseYear": releaseYear,
       "duration": duration,
-      "url": url,
+      "coverURL": coverURL,
       "country": country,
-      "production": production,
-      "box_office": boxOffice,
-      "awards": awards,
+      "recordingHouse": recordingHouse,
+      "songURL": songURL,
+      "album": album,
       "language": language,
       "genre": genre,
-      "director": director,
     });
+    return resp.data;
+  }
 
+  Future deleteSong(title) async {
+    final resp = await dio.delete('http://localhost:5000/deleteSong',
+        queryParameters: {"title": title});
     return resp.data;
   }
 }

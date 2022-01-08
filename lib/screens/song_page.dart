@@ -432,7 +432,7 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                             );
                                           }));
                                         },
-                                        child: const Text('review'),
+                                        child: const Text('REVIEWS'),
                                       ),
                                     ),
                                   ),

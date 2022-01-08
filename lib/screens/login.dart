@@ -165,23 +165,35 @@ class _LogInState extends State<LogIn> {
                       ),
                     ),
                   ),
-                  // Card(
-                  //   color: Colors.red,
-                  //   elevation: 10,
-                  //   shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(14)),
-                  //   child: MaterialButton(
-                  //     minWidth: 200,
-                  //     height: 42,
-                  //     onPressed: () {
-                  //       Navigator.pushNamed(context, '/admin_login');
-                  //     },
-                  //     child: const Text(
-                  //       'Admin login',
-                  //       style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
-                  //     ),
-                  //   ),
-                  // )
+                  Card(
+                    color: Colors.green,
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                    child: MaterialButton(
+                      minWidth: 200,
+                      height: 42,
+                      onPressed: () {
+                        if (_key.currentState!.validate()) {
+                          if (_usernameController.text == 'admin' &&
+                              _passwordController.text == 'root') {
+                            box.write('uname', _usernameController.text);
+                            Navigator.pushNamed(context, '/admin_login');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Cannot login'),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: const Text(
+                        'Admin login',
+                        style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
