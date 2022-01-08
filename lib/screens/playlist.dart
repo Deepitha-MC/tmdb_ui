@@ -4,15 +4,15 @@ import 'package:tmdb/constants/input_decoration.dart';
 import 'package:tmdb/services/database.dart';
 
 // ignore: must_be_immutable
-class BrowseScreenWidget extends StatefulWidget {
+class PlaylistWidget extends StatefulWidget {
   double width;
-  BrowseScreenWidget({Key? key, required this.width}) : super(key: key);
+  PlaylistWidget({Key? key, required this.width}) : super(key: key);
 
   @override
-  State<BrowseScreenWidget> createState() => _BrowseScreenWidgetState();
+  State<PlaylistWidget> createState() => _PlaylistWidgetState();
 }
 
-class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
+class _PlaylistWidgetState extends State<PlaylistWidget> {
   List<String> titles = [
     '1.Language',
     '2.Artist',
@@ -54,7 +54,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
                       cursorColor: Colors.green,
                       decoration: inputDecoration.copyWith(
                           labelText:
-                              ' SEARCH BY ENTERING ${selectedVal.toString().split('.')[1].toUpperCase()}'),
+                              ' search by entering ${selectedVal.toString().split('.')[1]}'),
                       onFieldSubmitted: (String value) {
                         setState(() {
                           isSearching = true;
@@ -82,8 +82,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
                         value: items,
                         child: Text(
                           items.split('.')[1],
-                          style: const TextStyle(
-                              fontSize: 18, fontFamily: 'prodSans'),
+                          style: const TextStyle(fontSize: 12),
                         ),
                       );
                     }).toList(),
@@ -105,7 +104,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
               child: isSearching
                   ? SongGrid(
                       future: _db.handleBrowseRequests(searchingValue, index))
-                  : Text('Results will appear here'.toUpperCase()),
+                  : Text('Results will appear here'),
             ),
           )
         ],

@@ -120,7 +120,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           Expanded(
             flex: 8,
             child: Center(
-              child: songGrid(
+              child: SongGrid(
                 future: isSearching
                     ? Database().searchSongTitle(searchTitle)
                     : Database().getSongList(),

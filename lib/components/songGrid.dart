@@ -3,15 +3,15 @@ import 'package:tmdb/screens/song_page.dart';
 import 'package:tmdb/services/database.dart';
 import 'package:lottie/lottie.dart';
 
-class songGrid extends StatefulWidget {
+class SongGrid extends StatefulWidget {
   Future future;
-  songGrid({Key? key, required this.future}) : super(key: key);
+  SongGrid({Key? key, required this.future}) : super(key: key);
 
   @override
   _SongGridState createState() => _SongGridState();
 }
 
-class _SongGridState extends State<songGrid> {
+class _SongGridState extends State<SongGrid> {
   late ScrollController _controller;
   bool isHover = false;
   @override

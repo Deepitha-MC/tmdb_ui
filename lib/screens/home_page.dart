@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:tmdb/components/songGrid.dart';
 import 'package:tmdb/screens/browse.dart';
 import 'package:tmdb/screens/home.dart';
+import 'package:tmdb/screens/playlist.dart';
 import 'package:tmdb/services/controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     List pages = [
       HomeWidget(width: width),
       BrowseScreenWidget(width: width),
+      PlaylistWidget(width: width),
     ];
     Controller controller = Controller();
     return Scaffold(
@@ -43,9 +45,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const ListTile(
                           title: Text(
-                            'TMDB.',
+                            'Algorhythm',
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 23,
                               color: Color(0xff00ff00),
                               fontWeight: FontWeight.bold,
                               fontFamily: 'prodSans',
@@ -69,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                   fontSize: 18, fontFamily: 'prodSans')),
                           leading: const FaIcon(
-                            FontAwesomeIcons.play,
+                            FontAwesomeIcons.home,
                             color: Color(0xff00ff00),
                           ),
                           onTap: () {
@@ -86,6 +88,17 @@ class _HomePageState extends State<HomePage> {
                           ),
                           onTap: () {
                             controller.index.value = 1;
+                          },
+                        ),
+                        ListTile(
+                          title: const Text('Playlist',
+                              style: TextStyle(fontSize: 13)),
+                          leading: const FaIcon(
+                            FontAwesomeIcons.play,
+                            color: Color(0xff00ff00),
+                          ),
+                          onTap: () {
+                            controller.index.value = 2;
                           },
                         ),
                         ListTile(

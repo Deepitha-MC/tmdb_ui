@@ -28,12 +28,15 @@ class SongPage extends StatefulWidget {
 
 class _SongPageState extends State<SongPage> {
   @override
+  Color _iconColor = Colors.white;
+
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     TextEditingController review_descController = TextEditingController();
     int rating = 10;
     final box = GetStorage();
+
     return Scaffold(
       body: SingleChildScrollView(
           child: FutureBuilder(
@@ -435,6 +438,23 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                         child: const Text('REVIEWS'),
                                       ),
                                     ),
+                                  ),
+                                  Positioned(
+                                    top: 20,
+                                    left: 20,
+                                    child: IconButton(
+                                        icon: Icon(
+                                          Icons.thumb_up,
+                                          color: _iconColor,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _iconColor =
+                                                (_iconColor == Colors.green)
+                                                    ? Colors.white
+                                                    : Colors.green;
+                                          });
+                                        }),
                                   ),
                                 ],
                               ),

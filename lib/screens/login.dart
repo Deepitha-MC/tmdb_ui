@@ -31,8 +31,8 @@ class _LogInState extends State<LogIn> {
         child: const SizedBox(
           child: Center(
             child: Text(
-              'Login',
-              style: TextStyle(fontSize: 30, fontFamily: 'prodSans'),
+              'Algorhythm',
+              style: TextStyle(fontSize: 30, fontFamily: 'geomet', color: Colors.green),
             ),
           ),
         ),
