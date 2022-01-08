@@ -35,7 +35,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   margin: const EdgeInsets.only(right: 40, top: 10),
                   child: SizedBox(
                     width: widget.width / 5.6,
-                    height: 50,
+                    height: 55,
                     child: Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: TextFormField(
@@ -66,16 +66,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   'Search...',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: Colors.lightGreen,
-                                    fontSize: 12,
-                                  ),
+                                      color: Colors.lightGreen,
+                                      fontSize: 18,
+                                      fontFamily: 'prodSans'),
                                 )
                               ],
                             ),
                           ),
                           hintText: 'example ->Bleed',
                           hintStyle: const TextStyle(
-                              fontSize: 12, color: Colors.lightGreen),
+                              fontFamily: 'prodSans',
+                              fontSize: 16,
+                              color: Colors.lightGreen),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                           ),
@@ -97,7 +99,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     backgroundColor: Colors.lightGreen,
                     child: Text(
                       box.read('uname').toString()[0],
-                      style: const TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 25),
                     ),
                   ),
                 ),
@@ -106,7 +108,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: Text(
                     box.read('uname').toString(),
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
               ],

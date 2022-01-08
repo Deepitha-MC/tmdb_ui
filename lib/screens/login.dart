@@ -32,7 +32,7 @@ class _LogInState extends State<LogIn> {
           child: Center(
             child: Text(
               'Login',
-              style: TextStyle(fontSize: 30, fontFamily: 'geomet'),
+              style: TextStyle(fontSize: 30, fontFamily: 'prodSans'),
             ),
           ),
         ),
@@ -125,7 +125,7 @@ class _LogInState extends State<LogIn> {
                       },
                       child: const Text(
                         'Create account',
-                        style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
+                        style: TextStyle(fontSize: 12, fontFamily: 'prodSans'),
                       ),
                     ),
                   ),
@@ -161,7 +161,7 @@ class _LogInState extends State<LogIn> {
                       },
                       child: const Text(
                         'Login',
-                        style: TextStyle(fontSize: 12, fontFamily: 'geomet'),
+                        style: TextStyle(fontSize: 12, fontFamily: 'prodSans'),
                       ),
                     ),
                   ),

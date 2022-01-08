@@ -28,7 +28,7 @@ class AdminLogin extends StatelessWidget {
           child: Center(
             child: Text(
               'Admin Page',
-              style: TextStyle(fontSize: 40, fontFamily: 'geomet'),
+              style: TextStyle(fontSize: 40, fontFamily: 'prodSans'),
             ),
           ),
         ),

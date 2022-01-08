@@ -54,7 +54,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
                       cursorColor: Colors.green,
                       decoration: inputDecoration.copyWith(
                           labelText:
-                              ' search by entering ${selectedVal.toString().split('.')[1]}'),
+                              ' SEARCH BY ENTERING ${selectedVal.toString().split('.')[1].toUpperCase()}'),
                       onFieldSubmitted: (String value) {
                         setState(() {
                           isSearching = true;
@@ -82,7 +82,8 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
                         value: items,
                         child: Text(
                           items.split('.')[1],
-                          style: const TextStyle(fontSize: 12),
+                          style: const TextStyle(
+                              fontSize: 18, fontFamily: 'prodSans'),
                         ),
                       );
                     }).toList(),
@@ -104,7 +105,7 @@ class _BrowseScreenWidgetState extends State<BrowseScreenWidget> {
               child: isSearching
                   ? songGrid(
                       future: _db.handleBrowseRequests(searchingValue, index))
-                  : Text('Results will appear here'),
+                  : Text('Results will appear here'.toUpperCase()),
             ),
           )
         ],

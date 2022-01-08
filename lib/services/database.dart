@@ -83,13 +83,14 @@ class Database {
     return resp.data;
   }
 
-  Future addRating(int songID, String uname, rating) async {
-    final resp =
-        await dio.post('http://localhost:5000/addRating', queryParameters: {
-      "songID": songID,
-      "ratings": rating,
-      "username": uname,
-    });
+  Future addRating(int songID, String uname, rating, String review) async {
+    final resp = await dio.post('http://localhost:5000/addRating/',
+        queryParameters: {
+          "songID": songID,
+          "ratings": rating,
+          "username": uname,
+          "review": review
+        });
     resp.data;
   }
 

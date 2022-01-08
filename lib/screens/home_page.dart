@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 30,
                               color: Color(0xff00ff00),
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'geomet',
+                              fontFamily: 'prodSans',
                             ),
                           ),
                         ),
@@ -56,7 +56,9 @@ class _HomePageState extends State<HomePage> {
                           height: 54,
                         ),
                         const ListTile(
-                          title: Text('Menu', style: TextStyle(fontSize: 13)),
+                          title: Text('Menu',
+                              style: TextStyle(
+                                  fontSize: 18, fontFamily: 'prodSans')),
                           leading: FaIcon(
                             FontAwesomeIcons.list,
                             color: Color(0xff00ff00),
@@ -64,7 +66,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ListTile(
                           title: const Text('Home',
-                              style: TextStyle(fontSize: 13)),
+                              style: TextStyle(
+                                  fontSize: 18, fontFamily: 'prodSans')),
                           leading: const FaIcon(
                             FontAwesomeIcons.play,
                             color: Color(0xff00ff00),
@@ -75,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ListTile(
                           title: const Text('Browse',
-                              style: TextStyle(fontSize: 13)),
+                              style: TextStyle(
+                                  fontSize: 18, fontFamily: 'prodSans')),
                           leading: const FaIcon(
                             FontAwesomeIcons.search,
                             color: Color(0xff00ff00),
@@ -86,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ListTile(
                           title: const Text('LogOut',
-                              style: TextStyle(fontSize: 13)),
+                              style: TextStyle(
+                                  fontSize: 18, fontFamily: 'prodSans')),
                           leading: const FaIcon(
                             FontAwesomeIcons.signOutAlt,
                             color: Color(0xff00ff00),

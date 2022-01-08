@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:tmdb/screens/review_page.dart';
 import 'package:tmdb/services/database.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:tmdb/constants/input_decoration.dart';
 // import 'package:url_launcher/url_launcher.dart';
 import 'dart:html' as html;
 
@@ -30,6 +31,7 @@ class _SongPageState extends State<SongPage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    TextEditingController review_descController = TextEditingController();
     int rating = 10;
     final box = GetStorage();
     return Scaffold(
@@ -110,7 +112,7 @@ class _SongPageState extends State<SongPage> {
                                       text: snap.data['songName'],
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'geomet',
+                                        fontFamily: 'prodSans',
                                         fontSize: snap.data['songName']
                                                     .toString()
                                                     .length >
@@ -142,14 +144,14 @@ class _SongPageState extends State<SongPage> {
                                   text: TextSpan(
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: 'geomet'),
+                                          fontFamily: 'prodSans'),
                                       children: [
                                         const TextSpan(
                                           text: 'Released on :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['releaseYear']
@@ -164,7 +166,7 @@ class _SongPageState extends State<SongPage> {
                                           // '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontFamily: 'prodSans',
                                           ),
                                         ),
@@ -173,13 +175,13 @@ class _SongPageState extends State<SongPage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['artist'] + '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontFamily: 'prodSans',
                                           ),
                                         ),
@@ -188,13 +190,13 @@ class _SongPageState extends State<SongPage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['album'] + '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontFamily: 'prodSans',
                                           ),
                                         ),
@@ -203,14 +205,14 @@ class _SongPageState extends State<SongPage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['recordingHouse'] +
                                               '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontFamily: 'prodSans',
                                           ),
                                         ),
@@ -219,22 +221,22 @@ class _SongPageState extends State<SongPage> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['lang'] + '\n',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontFamily: 'prodSans',
                                           ),
                                         ),
                                         const TextSpan(
-                                          text: 'genre :  ',
+                                          text: 'Genre :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text: snap.data['genre'] + '\n',
@@ -242,14 +244,14 @@ class _SongPageState extends State<SongPage> {
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
                                               fontFamily: 'prodSans',
-                                              fontSize: 16),
+                                              fontSize: 18),
                                         ),
                                         const TextSpan(
                                           text: 'Where to listen :  ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 12),
+                                              fontSize: 18),
                                         ),
                                         TextSpan(
                                           text:
@@ -259,7 +261,7 @@ class _SongPageState extends State<SongPage> {
                                               fontWeight: FontWeight.normal,
                                               fontStyle: FontStyle.normal,
                                               fontFamily: 'prodSans',
-                                              fontSize: 16),
+                                              fontSize: 18),
                                         ),
                                       ]),
                                 ),
@@ -275,11 +277,11 @@ class _SongPageState extends State<SongPage> {
                             // ),
 
                             Positioned(
-                                top: 340,
-                                left: 1000,
+                                top: 411,
+                                left: 1093,
                                 child: Center(
                                   child: Html(
-                                      data: ''' <iframe width="420" height="315"
+                                      data: ''' <iframe width="400" height="300"
 src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('?v=', '/')}">
 </iframe> '''),
                                 )),
@@ -328,19 +330,21 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              10)),
+                                                              50)),
                                                   title: const Center(
                                                       child: Text('Rating')),
                                                   actions: [
                                                     RatingBar.builder(
                                                       initialRating:
-                                                          (snap.data['ratings'])
-                                                              as double,
+                                                          double.parse(snap
+                                                              .data['ratings']
+                                                              .toStringAsFixed(
+                                                                  0)),
                                                       minRating: 1,
                                                       maxRating: 10,
                                                       direction:
                                                           Axis.horizontal,
-                                                      allowHalfRating: false,
+                                                      allowHalfRating: true,
                                                       itemCount: 10,
                                                       itemPadding:
                                                           const EdgeInsets
@@ -355,6 +359,23 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                       onRatingUpdate: (rate) {
                                                         rating = rate as int;
                                                       },
+                                                    ),
+                                                    SizedBox(
+                                                      height: 100,
+                                                      width: 200,
+                                                      child: TextField(
+                                                        maxLines: 4,
+                                                        cursorColor:
+                                                            Colors.white,
+                                                        controller:
+                                                            review_descController,
+                                                        decoration:
+                                                            inputDecoration
+                                                                .copyWith(
+                                                          labelText:
+                                                              'Description',
+                                                        ),
+                                                      ),
                                                     ),
                                                     Card(
                                                       shape:
@@ -374,7 +395,9 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                               widget.data[
                                                                   'songID'],
                                                               box.read('uname'),
-                                                              rating);
+                                                              rating,
+                                                              review_descController
+                                                                  .text);
                                                           Navigator.of(context)
                                                               .pop();
                                                           setState(() {});
@@ -387,7 +410,7 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                                 );
                                               });
                                         },
-                                        child: const Text('Add rating'),
+                                        child: const Text('Add rating/review'),
                                       ),
                                     ),
                                   ),
