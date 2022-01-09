@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:tmdb/components/songGrid.dart';
 import 'package:tmdb/screens/browse.dart';
 import 'package:tmdb/screens/home.dart';
+import 'package:tmdb/screens/liked_songs.dart';
 import 'package:tmdb/services/controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     List pages = [
       HomeWidget(width: width),
       BrowseScreenWidget(width: width),
+      LikedSongsWidget(width: width),
     ];
     Controller controller = Controller();
     return Scaffold(
@@ -86,6 +88,16 @@ class _HomePageState extends State<HomePage> {
                           ),
                           onTap: () {
                             controller.index.value = 1;
+                          },
+                        ),
+                        ListTile(
+                          title: const Text('Liked Songs',
+                              style: TextStyle(
+                                  fontFamily: 'prodSans', fontSize: 18)),
+                          leading: const FaIcon(FontAwesomeIcons.heart,
+                              color: Color(0xff00ff00)),
+                          onTap: () {
+                            controller.index.value = 2;
                           },
                         ),
                         ListTile(

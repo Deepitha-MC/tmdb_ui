@@ -38,12 +38,12 @@ class Database {
     late Map<String, dynamic> query;
     switch (index) {
       case '1':
-        if (val == 'lang') {
-          url = 'http://localhost:5000/getLang';
-        } else {
-          url = 'http://localhost:5000/getSongsByLang';
-          query = {'lang': val};
-        }
+        // if (val == 'lang') {
+        //   url = 'http://localhost:5000/getLang';
+        // } else {
+        url = 'http://localhost:5000/getSongsByLang';
+        query = {'lang': val};
+        // }
         break;
       case '2':
         url = 'http://localhost:5000/getSongsByArtist';
@@ -80,6 +80,37 @@ class Database {
     }
     final resp = await dio.get(url, queryParameters: query);
     // print(resp.data[0]);
+    return resp.data;
+  }
+
+  Future handleLikedSongsRequests(uname, index, val) async {
+    late String url;
+    late Map<String, dynamic> query;
+    switch (index) {
+      case '1':
+        if (val == '') {
+          url = 'http://localhost:5000/getLikedSongs';
+          query = {'username': uname};
+        }
+        break;
+      case '2':
+        url = 'http://localhost:5000/getLikedSongByTitle';
+        query = {'songName': val, 'username': uname};
+    }
+    final resp = await dio.get(url, queryParameters: query);
+    // print(resp.data[0]);
+    return resp.data;
+  }
+
+  Future addToLikedSongs(int songID, String uname) async {
+    final resp = await dio.post('http://localhost:5000/addToLikedSongs',
+        queryParameters: {"songID": songID, "username": uname});
+    resp.data;
+  }
+
+  Future getLikedSongs(String uname) async {
+    final resp = await dio.get('http://localhost:5000/getLikedSongs',
+        queryParameters: {"username": uname});
     return resp.data;
   }
 

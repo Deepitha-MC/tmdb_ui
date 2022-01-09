@@ -10,12 +10,12 @@ import 'package:tmdb/services/database.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:tmdb/constants/input_decoration.dart';
 // import 'package:url_launcher/url_launcher.dart';
-import 'dart:html' as html;
+// import 'dart:html' as html;
 
-void htmlOpenLink(String url) {
-//  String url = 'https://flutter.dev';
-  html.window.open(url, '_blank');
-}
+// void htmlOpenLink(String url) {
+// //  String url = 'https://flutter.dev';
+//   html.window.open(url, '_blank');
+// }
 
 // ignore: must_be_immutable
 class SongPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class SongPage extends StatefulWidget {
 
 class _SongPageState extends State<SongPage> {
   @override
+  Color _iconColor = Colors.white;
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -438,6 +439,25 @@ src="${snap.data['songURL'].toString().replaceAll('watch', 'embed').replaceAll('
                                   ),
                                 ],
                               ),
+                            ),
+                            Positioned(
+                              top: 110,
+                              left: 1000,
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.thumb_up,
+                                    color: _iconColor,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _iconColor = (_iconColor == Colors.green)
+                                          ? Colors.white
+                                          : Colors.green;
+                                    });
+                                    Database().addToLikedSongs(
+                                        widget.data['songID'],
+                                        box.read('uname'));
+                                  }),
                             ),
                             //back button
                             Positioned(
